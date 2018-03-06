@@ -14,19 +14,33 @@ var walls_drawn = false
 
 
 function setup() {
-  createCanvas(1300,630)
-  background(210)
+  createCanvas(window.innerWidth - 5, window.innerHeight - 5)
+
+  resetGrid()
+}
+
+function resetGrid() {
+  background(200,255,200)
+
+  finished = false
+  walls_drawn = false
+  options = []
+  grid = []
   for(var i = 0; i < grid_height; i++) {
     for(var j = 0; j < grid_width; j++) {
       grid.push(new Cell(j,i))
     }
   }
-  while(start_cell == end_cell) {
+  start_cell = random(grid)
+  end_cell = random(grid)
+  while(start_cell === end_cell) {
     start_cell = random(grid)
     end_cell = random(grid)
   }
   end_cell.walls = [false, false, false, false]
+  end_cell.neighbours().forEach( x => x.walls = [false, false, false, false])
   start_cell.walls = [false, false, false, false]
+  start_cell.neighbours().forEach( x => x.walls = [false, false, false, false])
   current_cell = start_cell
 }
 
@@ -77,25 +91,6 @@ function draw() {
       finished = true
     }
   } else {
-    // reset
-    finished = false
-    walls_drawn = false
-    options = []
-    grid = []
-    background(210)
-    for(var i = 0; i < grid_height; i++) {
-      for(var j = 0; j < grid_width; j++) {
-        grid.push(new Cell(j,i))
-      }
-    }
-    start_cell = random(grid)
-    end_cell = random(grid)
-    while(start_cell == end_cell) {
-      start_cell = random(grid)
-      end_cell = random(grid)
-    }
-    end_cell.walls = [false, false, false, false]
-    start_cell.walls = [false, false, false, false]
-    current_cell = start_cell
+    resetGrid()
   }
 }

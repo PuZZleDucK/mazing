@@ -13,3 +13,8 @@ A JavaScript random maze generator and maze solver.
 #### Deployment
 
 Deployed on [GH Pages](https://puzzleduck.github.io/mazing/index.html)
+
+#### Todo
+
+- blacklist dead ends
+- detect no-solvers (go left, circle clockwise, if circuit then nosolve)
