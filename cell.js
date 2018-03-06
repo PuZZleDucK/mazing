@@ -11,22 +11,26 @@ Cell = function(x, y) {
       strokeWeight(2)
       stroke(0)
       if(this.walls[0]) {
-        line((this.x * cell_size), (this.y * cell_size), ((this.x + 1) * cell_size), (this.y * cell_size)) //top
+        line((this.x * cell_size), (this.y * cell_size) + header_size,
+        ((this.x + 1) * cell_size), (this.y * cell_size) + header_size) //top
       }
       if(this.walls[1]) {
-        line((this.x + 1) * cell_size, (this.y + 1) * cell_size, (this.x + 1) * cell_size, this.y * cell_size) //right
+        line((this.x + 1) * cell_size, ((this.y + 1) * cell_size) + header_size,
+        (this.x + 1) * cell_size, (this.y * cell_size) + header_size) //right
       }
       if(this.walls[2]) {
-        line((this.x + 1) * cell_size, (this.y + 1) * cell_size, this.x * cell_size, (this.y + 1) * cell_size) //bottom
+        line((this.x + 1) * cell_size, ((this.y + 1) * cell_size) + header_size,
+        this.x * cell_size, ((this.y + 1) * cell_size) + header_size) //bottom
       }
       if(this.walls[3]) {
-        line(this.x * cell_size, this.y * cell_size, this.x * cell_size, (this.y + 1) * cell_size)  //left
+        line(this.x * cell_size, (this.y * cell_size) + header_size,
+        this.x * cell_size, ((this.y + 1) * cell_size) + header_size)  //left
       }
     }
     if(this.visited) {
       noStroke()
       fill(255,255,0,50)
-      rect((this.x * cell_size)+1, (this.y * cell_size)+1, cell_size-2, cell_size-2)
+      rect((this.x * cell_size)+1, (this.y * cell_size) + 1 + header_size, cell_size - 2, cell_size - 2)
     }
   }
   this.neighbours = function() {

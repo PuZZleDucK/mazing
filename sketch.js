@@ -11,6 +11,7 @@ var finished = false
 var current_cell
 var options = []
 var walls_drawn = false
+var header_size = 40
 
 
 function setup() {
@@ -21,6 +22,11 @@ function setup() {
 
 function resetGrid() {
   background(200,255,200)
+  textSize(28)
+  fill(0)
+  text("Automatic Maze Solving - Using 'as the crow flies' heuristic",80,30)
+  grid_height = floor((height - header_size) / cell_size)
+  grid_width = floor(width / cell_size)
 
   finished = false
   walls_drawn = false
@@ -48,9 +54,9 @@ function draw() {
   grid.forEach( x => x.draw())
   noStroke()
   fill(0,255,0)
-  rect((start_cell.x * cell_size), (start_cell.y * cell_size), cell_size, cell_size)
+  rect((start_cell.x * cell_size), (start_cell.y * cell_size) + header_size, cell_size, cell_size)
   fill(255,0,0)
-  rect((end_cell.x * cell_size), (end_cell.y * cell_size), cell_size, cell_size)
+  rect((end_cell.x * cell_size), (end_cell.y * cell_size) + header_size, cell_size, cell_size)
   if(!finished) {
     if(current_cell.x == end_cell.x && current_cell.y == end_cell.y){
       finished = true
@@ -59,7 +65,7 @@ function draw() {
     options = options.concat(current_cell.neighbours())
     fill(0,0,255)
     options.forEach(opt => {
-      rect((opt.x * cell_size)+2, (opt.y * cell_size)+2, cell_size-4, cell_size-4)
+      rect((opt.x * cell_size) + 2, (opt.y * cell_size) + 2 + header_size, cell_size-4, cell_size-4)
     })
     walls_drawn = true
 
